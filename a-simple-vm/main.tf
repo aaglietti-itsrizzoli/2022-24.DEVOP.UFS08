@@ -12,7 +12,7 @@ variable "GOOGLE_CLOUD_PROJECT_ID" {
 }
 
 provider "google" {
-  project = "${var.GOOGLE_CLOUD_PROJECT_ID}"
+  project = var.GOOGLE_CLOUD_PROJECT_ID
 }
 
 resource "google_compute_instance" "default" {
@@ -40,6 +40,6 @@ resource "google_compute_instance" "default" {
   }
 
   metadata = {
-    ssh-keys = "jon:${file(pathexpand("~/.ssh/id_rsa.pub"))}"
+   // ssh-keys = "jon:${file(pathexpand("~/.ssh/id_rsa.pub"))}"
   }
 }
