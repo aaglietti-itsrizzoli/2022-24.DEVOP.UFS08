@@ -116,6 +116,21 @@ resource "google_cloud_run_service" "middleware_cloudrun_instance" {
     spec {
       containers {
         image = "us-docker.pkg.dev/cloudrun/container/hello"
+        env {
+          name  = "DB1_HOST"
+          value = nonsensitive(data.doppler_secrets.my_project.map.MASTER_DB_HOST)
+
+        }
+
+        env {
+          name  = "DB1_USER1"
+          value = data.doppler_secrets.my_project.map.MASTER_DB_USER1
+        }
+
+        env {
+          name  = "DB1_USER1_PSW"
+          value = data.doppler_secrets.my_project.map.MASTER_DB_USER1_PSW
+        }
 
         // Defines which ports (and protocol) are enabled/exposed on the Docker container
         ports {
